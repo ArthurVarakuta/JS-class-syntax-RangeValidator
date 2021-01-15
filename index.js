@@ -1,9 +1,13 @@
 class RangeValidator {
   constructor(from, to) {
-    this._from = from;
-    this._to = to;
+    this.from = from;
+    this.to = to;
   }
   set from(number) {
+    if (this.from > this.to &&
+        this.to < this.from) {
+      throw new RangeError('Input incorrect values');
+    }
     if (typeof number !== 'number') {
       throw new TypeError('Value must be a number');
     } else {
@@ -14,6 +18,10 @@ class RangeValidator {
     return this._from;
   }
   set to(number) {
+    if (this.from > this.to &&
+        this.to < this.from) {
+      throw new RangeError('Input incorrect values');
+    }
     if (typeof number !== 'number') {
       throw new TypeError('Value must be a number');
     } else {
@@ -23,14 +31,48 @@ class RangeValidator {
   get to() {
     return this._to;
   }
+  set _from(number) {
+    if (this._from > this._to &&
+        this._to < this._from) {
+      throw new RangeError('Input incorrect values');
+    }
+    if (typeof number !== 'number') {
+      throw new TypeError('Value must be a number');
+    } else {
+      return number;
+    }
+  }
+  get _from() {
+    return this._from;
+  }
+  set _to(number) {
+    if (this._from > this._to &&  
+        this._to < this._from) {
+      throw new RangeError('Input incorrect values');
+    }
+    if (typeof number !== 'number') {
+      throw new TypeError('Value must be a number');
+    } else {
+      return number;
+    }
+  }
+  get _to() {
+    return this._to;
+  }
+
   get range() {
-    return [this._from, this._to];
+    return [this.from, this.to];
   }
   validate(checkFrom, checkTo) {
-    if (checkFrom >= this._from && checkTo <= this._to) {
-      return true;
+    if (
+      checkFrom >= this._from &&
+      checkTo <= this._to &&
+      checkFrom >= this.from &&
+      checkTo <= this.to
+    ) {
+      return 'Array is valid';
     } else {
-      return false;
+      return 'Array is not valid';
     }
   }
 }
