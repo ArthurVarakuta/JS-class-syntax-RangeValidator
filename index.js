@@ -11,7 +11,7 @@ class RangeValidator {
     }
   }
   get from() {
-    return;
+    return this._from;
   }
   set to(number) {
     if (typeof number !== 'number') {
@@ -21,7 +21,7 @@ class RangeValidator {
     }
   }
   get to() {
-    return;
+    return this._to;
   }
   get range() {
     return [this._from, this._to];
